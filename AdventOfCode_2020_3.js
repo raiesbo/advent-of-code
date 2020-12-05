@@ -32,6 +32,9 @@ const treesCounter = (arr, slopeA, slopeB) => {
     return trees;
 }
 
+
+// Test Data:
+
 /*
 const forest = [
     "#...",

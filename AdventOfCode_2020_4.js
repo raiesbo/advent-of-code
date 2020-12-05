@@ -1,3 +1,4 @@
+// --- Day 4: Passport Processing ---
 
 fetch("https://adventofcode.com/2020/day/4/input")
     .then(response => response.text())
@@ -24,11 +25,8 @@ const passportChecker = (arr) => {
     return count
 }
 
+// Test Data:
 /*
-const Data2 = [
-    "eyr:2028 iyr:2016 byr:1995 ecl:oth↵pid:543685203 hcl:#c0946f↵hgt:152cm↵cid:252"
-]
-
 const Data = [
     "eyr:2028 iyr:2016 byr:1995 ecl:oth↵pid:543685203 hcl:#c0946f↵hgt:152cm↵cid:252",
     "hcl:#733820 hgt:155cm↵iyr:2013 byr:1989 pid:728471979↵ecl:grn eyr:2022",

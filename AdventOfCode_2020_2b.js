@@ -1,12 +1,11 @@
 // --- Day 2: Password Philosophy ---
 
-/*
 fetch("https://adventofcode.com/2020/day/2/input")
     .then(response => response.text())
     .then(text => text.trim())
     .then(inputData => console.log(dataCalc(inputData.split('\n'))))
     .catch(e => console.log(e))
-*/
+
 
 const inputCalc = (input) => {
     const splitInput = input.split(" ")
@@ -15,7 +14,6 @@ const inputCalc = (input) => {
     let min = parseInt(minMax[0])
     let max = parseInt(minMax[1])
     let letter = splitInput[1][0]
-    //console.log(min, max, letter, password, password[min-1], password[max-1])
 
     if (password[min-1] === letter && password[max-1] !== letter) {
         return true
@@ -38,12 +36,13 @@ const dataCalc = (list) => {
     return count
 }
 
-// Test
+// Test Data: 
+
 /*
 const dataInput = [
     "4-10 q: qqqqqqqqqiqbkdqrgqq"
 ]
-*/
+
 
 const dataInput = [
     "4-10 q: qqqpqqqqqqqbkdqrgqq",
@@ -75,3 +74,5 @@ const dataInput = [
 ]
 
 console.log(dataCalc(dataInput))
+
+*/
