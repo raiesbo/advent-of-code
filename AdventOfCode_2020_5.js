@@ -30,9 +30,17 @@ const seatCalc = (arr) => {
                     collumnPos = collumnPos[0]
                 }
             } else if (collumnCode[i] === "R") {
-                collumnPos[0] = Math.round(collumnPos[1] / 2)
+                if (collumnPos[0] === 0) {
+                    collumnPos[0] = Math.round(collumnPos[1] / 2)
+                } else {
+                    collumnPos[0] = collumnPos[0] + Math.round((collumnPos[1] - collumnPos[0]) / 2)
+                }
             } else if (collumnCode[i] === "L") {
-                collumnPos[1] = collumnPos[1] - Math.round(collumnPos[0] / 2)
+                if (collumnPos[0] === 0) {
+                    collumnPos[1] = Math.round(collumnPos[1] / 2)
+                } else {
+                    collumnPos[1] = collumnPos[1] - Math.round((collumnPos[1] - collumnPos[0]) / 2)
+                }
             }
         }
         // console.log(collumnPos)
