@@ -15,15 +15,28 @@ const yesCalc = (arr) => {
         // const separatedTeam = team.replace(/↵/g, " ").split(' '); // TEST LOCAL
         const separatedTeam = team.replace(/\n/g , " ").split(' '); // TEST CHROME
         let answers = []
+        let teamMembers = 0
 
         for (let person of separatedTeam) {
+            teamMembers++
+
+            // FIRST TEST
+            // Getting all the unic answers
             for(let answer of person) {
                 if (!answers.includes(answer)) {
                     answers.push(answer)
-                    yesTotal++
                 }
             }
+
         }
+        console.log(separatedTeam)
+        for (let answer of answers) {
+            if (separatedTeam.every((person) => person.includes(answer))) {
+                yesTotal++
+            }
+        }
+        
+        // console.log(teamMembers)
 
     }
     console.log(yesTotal)
@@ -44,6 +57,7 @@ const Data1 = [
     "k↵k↵tl↵k",
     "qebagdfvhr↵alvkif↵yufaovwi↵fivsa↵nwifazovu"
 ]
+
 
 
 yesCalc(Data)
