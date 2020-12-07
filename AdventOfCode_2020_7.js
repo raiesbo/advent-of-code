@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-fs.readFile("./input7.txt", 'utf8', function(err, data) {
+fs.readFile("./input7.txt", 'utf8', (err, data) => {
   if (err) throw err;
   bagChecker(data.trim().split('\n'))
 });
@@ -21,15 +21,13 @@ const bagChecker = (arr) => {
         }
     }
 
-    for (let i = 0; i < 20; i++) {
-        for (let bag of arr) {
-            const subBag = bag.split('contain')
+    for (let bag of arr) {
+        const subBag = bag.split('contain')
     
-            for (let color of shinyGoldBagContainters) {
-                if (subBag[1].includes(color) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2)) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2))) {
+        for (let color of shinyGoldBagContainters) {
+            if (subBag[1].includes(color) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2)) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2))) {
                     shinyGoldBagContainters.push(subBag[0].slice(0, -2)) 
                     
-                }
             }
         }
     }
@@ -78,7 +76,27 @@ const Data3 = [
     "bright magenta bags contain 1 plaid yellow bag, 1 dull white bag.",
     "dotted lime bags contain 4 shiny gray bags, 2 brig…gs, 5 dim fuchsia bags, 1 vibrant chartreuse bag.",
     "mirrored beige bags contain 2 plaid crimson bags, 3 wavy tomato bags.",
-    "pale purple bags contain 2 faded chartreuse bags, …lime bags, 4 drab white bags, 4 shiny olive bags.", "dull bronze bags contain 3 bright lavender bags.", "striped bronze bags contain 1 dark olive bag, 5 dotted orange bags.", "vibrant orange bags contain 1 plaid plum bag, 1 fa…ime bag, 1 clear lavender bag, 1 muted brown bag.", "dull blue bags contain 5 dotted tan bags, 2 light crimson bags.", "mirrored red bags contain 1 shiny crimson bag.", "vibrant coral bags contain 1 vibrant gray bag.", "plaid tan bags contain 4 clear magenta bags, 5 posh brown bags, 5 drab lime bags.", "dark yellow bags contain 2 striped bronze bags, 3 shiny tomato bags.", "mirrored lime bags contain 3 bright orange bags.", "mirrored salmon bags contain 3 dark white bags, 5 clear salmon bags.", "light crimson bags contain 1 plaid cyan bag, 2 pal…er bags, 5 pale violet bags, 1 shiny crimson bag.", "clear white bags contain 2 muted blue bags, 5 dotted olive bags.", "muted magenta bags contain 4 dark purple bags.", "clear red bags contain 4 dark gray bags, 3 striped beige bags.", "plaid gray bags contain 3 faded olive bags.", "posh teal bags contain 3 pale gray bags, 3 dim beige bags, 2 dark gray bags, 1 shiny coral bag.", "pale violet bags contain 5 pale silver bags, 2 shi…son bags, 5 dull olive bags, 2 drab magenta bags.", "shiny purple bags contain 5 shiny indigo bags, 3 d…reen bags, 2 wavy blue bags, 3 light salmon bags.", "mirrored gold bags contain 2 muted coral bags, 4 shiny lavender bags.", "drab brown bags contain 1 posh lime bag."
+    "pale purple bags contain 2 faded chartreuse bags, …lime bags, 4 drab white bags, 4 shiny olive bags.",
+    "dull bronze bags contain 3 bright lavender bags.",
+    "striped bronze bags contain 1 dark olive bag, 5 dotted orange bags.",
+    "vibrant orange bags contain 1 plaid plum bag, 1 fa…ime bag, 1 clear lavender bag, 1 muted brown bag.",
+    "dull blue bags contain 5 dotted tan bags, 2 light crimson bags.",
+    "mirrored red bags contain 1 shiny crimson bag.",
+    "vibrant coral bags contain 1 vibrant gray bag.",
+    "plaid tan bags contain 4 clear magenta bags, 5 posh brown bags, 5 drab lime bags.",
+    "dark yellow bags contain 2 striped bronze bags, 3 shiny tomato bags.",
+    "mirrored lime bags contain 3 bright orange bags.",
+    "mirrored salmon bags contain 3 dark white bags, 5 clear salmon bags.",
+    "light crimson bags contain 1 plaid cyan bag, 2 pal…er bags, 5 pale violet bags, 1 shiny crimson bag.",
+    "clear white bags contain 2 muted blue bags, 5 dotted olive bags.",
+    "muted magenta bags contain 4 dark purple bags.",
+    "clear red bags contain 4 dark gray bags, 3 striped beige bags.",
+    "plaid gray bags contain 3 faded olive bags.",
+    "posh teal bags contain 3 pale gray bags, 3 dim beige bags, 2 dark gray bags, 1 shiny coral bag.",
+    "pale violet bags contain 5 pale silver bags, 2 shi…son bags, 5 dull olive bags, 2 drab magenta bags.",
+    "shiny purple bags contain 5 shiny indigo bags, 3 d…reen bags, 2 wavy blue bags, 3 light salmon bags.",
+    "mirrored gold bags contain 2 muted coral bags, 4 shiny lavender bags.",
+    "drab brown bags contain 1 posh lime bag."
 ]
 
 
