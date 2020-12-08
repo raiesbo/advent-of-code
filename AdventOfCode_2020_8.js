@@ -38,6 +38,10 @@ const accFiller = (arr) => {
                 break;
         }
     }
+
+    
+    console.log(accumulator)
+    return accumulator
 }
 
 
