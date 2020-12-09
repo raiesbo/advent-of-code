@@ -1,7 +1,6 @@
 // --- Day 7: Handy Haversacks ---
 
 const fs = require('fs');
-
 fs.readFile("./input7.txt", 'utf8', (err, data) => {
   if (err) throw err;
   bagChecker(data.trim().split('\n'))
@@ -14,27 +13,25 @@ const bagChecker = (arr) => {
 
     for (let bag of arr) {
         const subBag = bag.split('contain')
-        // console.log(bag)
-        // console.log(subBag)
+
         if (subBag[1].includes("shiny gold") && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2))) {
             shinyGoldBagContainters.push(subBag[0].slice(0, -2))
         }
     }
 
-    for (let bag of arr) {
-        const subBag = bag.split('contain')
-    
-        for (let color of shinyGoldBagContainters) {
-            if (subBag[1].includes(color) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2)) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2))) {
-                    shinyGoldBagContainters.push(subBag[0].slice(0, -2)) 
-                    
+    for (let i = 0 ; i < 10; i ++) {
+        for (let bag of arr) {
+            const subBag = bag.split('contain')
+        
+            for (let color of shinyGoldBagContainters) {
+                if (subBag[1].includes(color) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2)) && !shinyGoldBagContainters.includes(subBag[0].slice(0, -2))) {
+                        shinyGoldBagContainters.push(subBag[0].slice(0, -2)) 
+                        
+                }
             }
         }
     }
     
-    
-    // console.log(shinyGoldBagContainters)
-
     console.log(shinyGoldBagContainters.length)
     return shinyGoldBagContainters.length
 }

@@ -1,7 +1,6 @@
 // --- Day 8: Handheld Halting ---
 
 const fs = require('fs');
-
 fs.readFile("./input8.txt", 'utf8', (err, data) => {
   if (err) throw err;
   accFiller(data.trim().split('\n'))
@@ -38,10 +37,6 @@ const accFiller = (arr) => {
                 break;
         }
     }
-
-    
-    console.log(accumulator)
-    return accumulator
 }
 
 
