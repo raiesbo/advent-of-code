@@ -27,7 +27,7 @@ const adapterCalc = (arr) => {
     }
 
     const result = joltAdapters_1 * (joltAdapters_3)
-    // console.log(joltAdapters_1, joltAdapters_2, joltAdapters_3)
+    console.log(joltAdapters_1, joltAdapters_2, joltAdapters_3, current)
     console.log(result)
     return result
 }
