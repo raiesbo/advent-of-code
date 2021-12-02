@@ -7,7 +7,7 @@ fs.readFile(__dirname + fileUrl, (error, data) => {
     }
     const cleanData = data.toString().trim().split('\n');
     const numbersArr = cleanData.map(num => parseInt(num))
-    calcNumber(numbersArr) // Result: 571
+    calcNumber(numbersArr) // Result: 1762050
 });
 
 const calcNumber = (arr) => {
