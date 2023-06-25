@@ -1,6 +1,6 @@
 # AdventOfCode
 
-Daily challenges from (Advent Of Code)[adventofcode.com], based on the traditional Advent calendar. The different challenges are carried by using multiple programming languages.
+Daily challenges from the [Advent Of Code](https://adventofcode.com), based on the traditional Advent calendar. The different challenges are solved by using multiple programming languages.
 
 ## Editions: 
 
