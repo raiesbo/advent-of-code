@@ -38,7 +38,7 @@ fn _ex_2a() {
 }
 
 fn _ex_2b() {
-    let content: String = read_file("./src/2a-data");
+    let content: String = read_file("./src/2b-data");
     let mut result = 0;
     for round in content.split("\n") {
         let mut min_red = 1;
