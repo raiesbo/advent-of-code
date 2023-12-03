@@ -21,7 +21,7 @@ fn _ex_1a() {
             }
         }
         let full_number = [first_number.to_string(), last_number.to_string()].join("");
-        result = result + ((full_number).to_string()).parse::<i32>().unwrap();
+        result += ((full_number).to_string()).parse::<i32>().unwrap();
     }
     println!("Result: {:?}", result);
 }
@@ -30,13 +30,10 @@ fn _ex_1b() {
     let file_path = "./src/1b-data";
     let content = fs::read_to_string(file_path).expect("Wrong file path");
     let split_content = content.split("\n");
-
     let nums = &vec![
         "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
     ];
-
     let mut result = 0;
-
     for line in split_content {
         let mut first_number: i32 = -1;
         let mut last_number: i32 = -1;
@@ -49,25 +46,18 @@ fn _ex_1b() {
                 }
             } else {
                 for (j, num) in nums.iter().enumerate() {
-                    let mut found_number = true;
-                    for (m, letter) in num.chars().enumerate() {
-                        let index = i + m;
-                        if index >= line.len() || letter != line.chars().nth(i + m).unwrap() {
-                            found_number = false
-                        }
-                    }
-                    if found_number {
+                    if line[i..line.len()].starts_with(num) {
                         let value: i32 = (j + 1).try_into().unwrap();
                         last_number = value;
                         if first_number < 0 {
                             first_number = value;
                         }
+                        break;
                     }
                 }
             }
         }
-        result = result + (first_number * 10 + last_number);
+        result += first_number * 10 + last_number;
     }
-
     println!("Result: {:?}", result);
 }
