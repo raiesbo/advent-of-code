@@ -11,7 +11,7 @@ func Day1B_optimized(filePath string) int {
 	lines := strings.Split(string(data), "\n")
 
 	lCol := []int{}
-	rColReps := make(map[int]int)
+	rColReps := [99999]int{}
 
 	for _, line := range lines {
 		numbers := strings.Split(line, "   ")
@@ -23,22 +23,14 @@ func Day1B_optimized(filePath string) int {
 		lastNumber, _ := strconv.Atoi(numbers[1])
 
 		lCol = append(lCol, firstNumber)
-
-		_, exists := rColReps[lastNumber]
-		if exists {
-			rColReps[lastNumber]++
-		} else {
-			rColReps[lastNumber] = 1
-		}
+		rColReps[lastNumber]++
 	}
 
 	result := 0
 
 	for _, numLeft := range lCol {
-		reps, exists := rColReps[numLeft]
-		if exists {
-			result += numLeft * reps
-		}
+		reps := rColReps[numLeft]
+		result += numLeft * reps
 	}
 
 	return result

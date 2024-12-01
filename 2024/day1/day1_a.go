@@ -12,8 +12,8 @@ func Day1A(filePath string) int {
 	data, _ := os.ReadFile(filePath)
 	lines := strings.Split(string(data), "\n")
 
-	lCol := []int{}
-	rCol := []int{}
+	lCol := make([]int, 0, 1000)
+	rCol := make([]int, 0, 1000)
 
 	for _, line := range lines {
 		numbers := strings.Split(line, "   ")
