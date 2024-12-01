@@ -11,7 +11,7 @@ func Day1B(filePath string) int {
 	lines := strings.Split(string(data), "\n")
 
 	lCol := []int{}
-	rCol := []int{}
+	rColReps := make(map[int]int)
 
 	for _, line := range lines {
 		numbers := strings.Split(line, "   ")
@@ -23,21 +23,22 @@ func Day1B(filePath string) int {
 		lastNumber, _ := strconv.Atoi(numbers[1])
 
 		lCol = append(lCol, firstNumber)
-		rCol = append(rCol, lastNumber)
+
+		_, exists := rColReps[lastNumber]
+		if exists {
+			rColReps[lastNumber]++
+		} else {
+			rColReps[lastNumber] = 1
+		}
 	}
 
 	result := 0
 
 	for _, numLeft := range lCol {
-		repetitions := 0
-
-		for _, numRight := range rCol {
-			if numLeft == numRight {
-				repetitions++
-			}
+		reps, exists := rColReps[numLeft]
+		if exists {
+			result += numLeft * reps
 		}
-
-		result += numLeft * repetitions
 	}
 
 	return result
