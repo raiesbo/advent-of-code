@@ -1,4 +1,4 @@
-# AdventOfCode
+# 🎄 Advent Of Code
 
 Daily challenges from the [Advent Of Code](https://adventofcode.com), based on the traditional Advent calendar. The different challenges are solved by using multiple programming languages.
 

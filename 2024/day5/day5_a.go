@@ -9,13 +9,10 @@ import (
 func Day5A(filePath string) int {
 	fileData, _ := os.ReadFile(filePath)
 	lines := strings.Split(string(fileData), "\n")
-
 	rules := [99][]int{}
-
 	result := 0
 
 	for _, line := range lines {
-
 		if strings.Contains(line, "|") {
 			numbers := strings.Split(line, "|")
 
