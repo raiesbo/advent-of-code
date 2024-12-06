@@ -7,4 +7,5 @@
 - [Day 3](https://github.com/raiesbo/advent-of-code/tree/master/2024/day3)
 - [Day 4](https://github.com/raiesbo/advent-of-code/tree/master/2024/day4)
 - [Day 5](https://github.com/raiesbo/advent-of-code/tree/master/2024/day5)
+- [Day 6](https://github.com/raiesbo/advent-of-code/tree/master/2024/day6)
 - ...
