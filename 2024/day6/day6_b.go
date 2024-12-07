@@ -1,117 +1,147 @@
 package main
 
 import (
+	"fmt"
 	"os"
-	"strings"
 )
 
-const (
-	UP    = "^"
-	RIGHT = ">"
-	DOWN  = "v"
-	LEFT  = "<"
-	STEP  = "X"
-	BLOCK = "#"
-)
+type Route struct {
+	steps map[string]bool
+}
 
-func Day6A(filePath string) int {
+func NewRoute() *Route {
+	return &Route{
+		steps: make(map[string]bool),
+	}
+}
+
+func (r *Route) append(key string) {
+	r.steps[key] = true
+}
+
+func (r *Route) isRepeated(key string) bool {
+	_, exists := r.steps[key]
+	return exists
+}
+
+func addObstruction(matrix [][]string, x int, y int) [][]string {
+	newMatrix := make([][]string, len(matrix))
+	for i := range matrix {
+		newMatrix[i] = append([]string{}, matrix[i]...)
+	}
+	newMatrix[x][y] = BLOCK
+	return newMatrix
+}
+
+func Day6B(filePath string) int {
 	fileData, _ := os.ReadFile(filePath)
 	matrix, x, y := buildMatrix(string(fileData))
+	count := 0
 
-	return moveStep(&matrix, x, y, matrix[x][y])
-}
-
-func buildMatrix(data string) ([][]string, int, int) {
-	matrix := [][]string{}
-	x := -1
-	y := -1
-
-	lines := strings.Split(data, "\n")
-
-	for i, line := range lines {
-		if len(line) < 2 {
-			continue
-		}
-
-		matrix = append(matrix, []string{})
-
-		for j, char := range line {
-			str := string(char)
-			matrix[i] = append(matrix[i], str)
-
-			if str == UP ||
-				str == RIGHT ||
-				str == DOWN ||
-				str == LEFT {
-				x = i
-				y = j
+	for i, row := range matrix {
+		for j, c := range row {
+			if c != BLOCK {
+				route := NewRoute()
+				newMatrix := addObstruction(matrix, i, j)
+				if withLoop(newMatrix, x, y, matrix[x][y], route) {
+					count++
+				}
 			}
 		}
 	}
 
-	return matrix, x, y
+	return count
 }
 
-func moveStep(matrix *[][]string, x int, y int, dir string) int {
-	if dir == UP {
-		if x-1 < 0 {
-			return 0
+func withLoop(matrix [][]string, x int, y int, dir string, r *Route) bool {
+	cX := x
+	cY := y
+	cDir := dir
+
+	for {
+		if cX == 0 || cY == 0 || cY == len(matrix[x])-1 || cX == len(matrix)-1 {
+			return false
 		}
 
-		nextStep := (*matrix)[x-1][y]
-		if nextStep != BLOCK {
-			if nextStep == STEP {
-				return moveStep(matrix, x-1, y, UP)
-			}
-			(*matrix)[x-1][y] = STEP
-			return 1 + moveStep(matrix, x-1, y, UP)
-		} else {
-			return moveStep(matrix, x, y, RIGHT)
+		key := fmt.Sprintf("%d;%d;%s", cX, cY, cDir)
+		if r.isRepeated(key) {
+			return true
 		}
-	} else if dir == RIGHT {
-		if len((*matrix)[x])-1 < y+1 {
-			return 0
-		}
+		r.append(key)
 
-		nextStep := (*matrix)[x][y+1]
-		if nextStep != BLOCK {
-			if nextStep == STEP {
-				return moveStep(matrix, x, y+1, RIGHT)
+		if cDir == UP {
+			if matrix[cX-1][cY] != BLOCK {
+				cX--
+			} else {
+				cDir = RIGHT
 			}
-			(*matrix)[x][y+1] = STEP
-			return 1 + moveStep(matrix, x, y+1, RIGHT)
-		} else {
-			return moveStep(matrix, x, y, DOWN)
-		}
-	} else if dir == DOWN {
-		if len((*matrix))-1 < x+1 {
-			return 0
-		}
-
-		nextStep := (*matrix)[x+1][y]
-		if nextStep != BLOCK {
-			if nextStep == STEP {
-				return moveStep(matrix, x+1, y, DOWN)
+		} else if cDir == RIGHT {
+			if matrix[cX][cY+1] != BLOCK {
+				cY++
+			} else {
+				cDir = DOWN
 			}
-			(*matrix)[x+1][y] = STEP
-			return 1 + moveStep(matrix, x+1, y, DOWN)
-		} else {
-			return moveStep(matrix, x, y, LEFT)
-		}
-	} else {
-		if y-1 < 0 {
-			return 0
-		}
-
-		nextStep := (*matrix)[x][y-1]
-		if nextStep != BLOCK {
-			if nextStep == STEP {
-				return moveStep(matrix, x, y-1, LEFT)
+		} else if cDir == DOWN {
+			if matrix[cX+1][cY] != BLOCK {
+				cX++
+			} else {
+				cDir = LEFT
 			}
-			(*matrix)[x][y-1] = STEP
-			return 1 + moveStep(matrix, x, y-1, LEFT)
 		} else {
-			return moveStep(matrix, x, y, UP)
+			if matrix[cX][cY-1] != BLOCK {
+				cY--
+			} else {
+				cDir = UP
+			}
 		}
 	}
 }
+
+// func moveFoward(matrix [][]string, x int, y int, dir string, r *Route) int {
+// 	key := fmt.Sprintf("%d;%d;%s", x, y, dir)
+// 	if r.isRepeated(key) {
+// 		return 1
+// 	}
+// 	r.append(key)
+
+// 	if dir == UP {
+// 		if x == 0 {
+// 			return 0
+// 		}
+
+// 		if matrix[x-1][y] != BLOCK {
+// 			return moveFoward(matrix, x-1, y, UP, r)
+// 		}
+// 		return moveFoward(matrix, x, y, RIGHT, r)
+// 	} else if dir == RIGHT {
+// 		if y == len(matrix[0])-1 {
+// 			return 0
+// 		}
+
+// 		if matrix[x][y+1] != BLOCK {
+// 			return moveFoward(matrix, x, y+1, RIGHT, r)
+// 		}
+// 		return moveFoward(matrix, x, y, DOWN, r)
+// 	} else if dir == DOWN {
+// 		if x == len(matrix)-1 {
+// 			return 0
+// 		}
+
+// 		if matrix[x+1][y] != BLOCK {
+// 			return moveFoward(matrix, x+1, y, DOWN, r)
+// 		}
+// 		return moveFoward(matrix, x, y, LEFT, r)
+// 	} else {
+// 		if y == 0 {
+// 			return 0
+// 		}
+
+// 		if matrix[x][y-1] != BLOCK {
+// 			return moveFoward(matrix, x, y-1, LEFT, r)
+// 		}
+// 		return moveFoward(matrix, x, y, UP, r)
+// 	}
+// }
+
+// 1274
+// 1587
