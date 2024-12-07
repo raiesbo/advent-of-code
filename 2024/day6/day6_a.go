@@ -12,6 +12,7 @@ const (
 	LEFT  = "<"
 
 	BLOCK = "#"
+	FREE  = "."
 	STEP  = "X"
 )
 

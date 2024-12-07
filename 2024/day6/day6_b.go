@@ -40,10 +40,10 @@ func Day6B(filePath string) int {
 
 	for i, row := range matrix {
 		for j, c := range row {
-			if c != BLOCK {
+			if c == FREE {
 				route := NewRoute()
 				newMatrix := addObstruction(matrix, i, j)
-				if withLoop(newMatrix, x, y, matrix[x][y], route) {
+				if withLoop(newMatrix, x, y, route) {
 					count++
 				}
 			}
@@ -53,10 +53,10 @@ func Day6B(filePath string) int {
 	return count
 }
 
-func withLoop(matrix [][]string, x int, y int, dir string, r *Route) bool {
+func withLoop(matrix [][]string, x int, y int, r *Route) bool {
 	cX := x
 	cY := y
-	cDir := dir
+	cDir := UP
 
 	for {
 		if cX == 0 || cY == 0 || cY == len(matrix[x])-1 || cX == len(matrix)-1 {
@@ -87,7 +87,7 @@ func withLoop(matrix [][]string, x int, y int, dir string, r *Route) bool {
 			} else {
 				cDir = LEFT
 			}
-		} else {
+		} else if cDir == LEFT {
 			if matrix[cX][cY-1] != BLOCK {
 				cY--
 			} else {
@@ -96,52 +96,3 @@ func withLoop(matrix [][]string, x int, y int, dir string, r *Route) bool {
 		}
 	}
 }
-
-// func moveFoward(matrix [][]string, x int, y int, dir string, r *Route) int {
-// 	key := fmt.Sprintf("%d;%d;%s", x, y, dir)
-// 	if r.isRepeated(key) {
-// 		return 1
-// 	}
-// 	r.append(key)
-
-// 	if dir == UP {
-// 		if x == 0 {
-// 			return 0
-// 		}
-
-// 		if matrix[x-1][y] != BLOCK {
-// 			return moveFoward(matrix, x-1, y, UP, r)
-// 		}
-// 		return moveFoward(matrix, x, y, RIGHT, r)
-// 	} else if dir == RIGHT {
-// 		if y == len(matrix[0])-1 {
-// 			return 0
-// 		}
-
-// 		if matrix[x][y+1] != BLOCK {
-// 			return moveFoward(matrix, x, y+1, RIGHT, r)
-// 		}
-// 		return moveFoward(matrix, x, y, DOWN, r)
-// 	} else if dir == DOWN {
-// 		if x == len(matrix)-1 {
-// 			return 0
-// 		}
-
-// 		if matrix[x+1][y] != BLOCK {
-// 			return moveFoward(matrix, x+1, y, DOWN, r)
-// 		}
-// 		return moveFoward(matrix, x, y, LEFT, r)
-// 	} else {
-// 		if y == 0 {
-// 			return 0
-// 		}
-
-// 		if matrix[x][y-1] != BLOCK {
-// 			return moveFoward(matrix, x, y-1, LEFT, r)
-// 		}
-// 		return moveFoward(matrix, x, y, UP, r)
-// 	}
-// }
-
-// 1274
-// 1587
