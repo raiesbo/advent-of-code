@@ -1,4 +1,4 @@
-## Day 1
+## Day 1: Historian Hysteria
 
 ```bash
 $ go test -bench=.
