@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"strings"
 )
@@ -57,7 +56,6 @@ func (c *City) AppendAtinode(x int, y int) {
 		y < c.Width &&
 		y >= 0 &&
 		c.Map[x][y] != ANTINODE {
-		fmt.Println("-->", x, y)
 		c.numAntinodes++
 		c.Map[x][y] = ANTINODE
 	}
