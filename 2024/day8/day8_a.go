@@ -50,7 +50,7 @@ func NewCity(data string) *City {
 	return nCity
 }
 
-func (c *City) AppendAtinode(x int, y int) {
+func (c *City) AppendAntinode(x int, y int) {
 	if x < c.Height &&
 		x >= 0 &&
 		y < c.Width &&
@@ -65,32 +65,10 @@ func (c *City) CalcAntinodes() {
 	for _, antennas := range c.Antennas {
 		for i, antenna := range antennas {
 			for j := i + 1; j < len(antennas); j++ {
-				difX := antenna.x - antennas[j].x
-				if difX < 0 {
-					difX *= -1
-				}
-				difY := antenna.y - antennas[j].y
-				if difY < 0 {
-					difY *= -1
-				}
-
-				if antenna.x >= antennas[j].x {
-					if antenna.y > antennas[j].y {
-						c.AppendAtinode(antenna.x+difX, antenna.y+difY)
-						c.AppendAtinode(antennas[j].x-difX, antennas[j].y-difY)
-					} else {
-						c.AppendAtinode(antenna.x+difX, antenna.y-difY)
-						c.AppendAtinode(antennas[j].x-difX, antennas[j].y+difY)
-					}
-				} else {
-					if antenna.y > antennas[j].y {
-						c.AppendAtinode(antenna.x-difX, antenna.y+difY)
-						c.AppendAtinode(antennas[j].x+difX, antennas[j].y-difY)
-					} else {
-						c.AppendAtinode(antenna.x-difX, antenna.y-difY)
-						c.AppendAtinode(antennas[j].x+difX, antennas[j].y+difY)
-					}
-				}
+				c.AppendAntinode(antenna.x+antenna.x-antennas[j].x,
+					antenna.y+antenna.y-antennas[j].y)
+				c.AppendAntinode(antennas[j].x+antennas[j].x-antenna.x,
+					antennas[j].y+antennas[j].y-antenna.y)
 			}
 		}
 	}
