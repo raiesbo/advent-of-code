@@ -12,6 +12,7 @@
 - [Day 8: Resonant Collinearity](https://github.com/raiesbo/advent-of-code/tree/master/2024/day8)
 - [Day 9: Disk Fragmenter](https://github.com/raiesbo/advent-of-code/tree/master/2024/day9)
 - [Day 10: Hoof It](https://github.com/raiesbo/advent-of-code/tree/master/2024/day_10)
+- [Day 11: Plutonian Pebbles](https://github.com/raiesbo/advent-of-code/tree/master/2024/day_11)
 - ...
 
 [<- Home](https://github.com/raiesbo/advent-of-code)
