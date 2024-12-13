@@ -14,6 +14,7 @@
 - [Day 10: Hoof It](https://github.com/raiesbo/advent-of-code/tree/master/2024/day_10)
 - [Day 11: Plutonian Pebbles](https://github.com/raiesbo/advent-of-code/tree/master/2024/day_11)
 - [Day 12: Garden Groups](https://github.com/raiesbo/advent-of-code/tree/master/2024/day_12)
+- [Day 13: Claw Contraption](https://github.com/raiesbo/advent-of-code/tree/master/2024/day_13)
 - ...
 
 [<- Home](https://github.com/raiesbo/advent-of-code)

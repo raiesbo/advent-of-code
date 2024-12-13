@@ -5,10 +5,6 @@ import (
 	"strings"
 )
 
-const (
-	VISITED = "."
-)
-
 type Garden struct {
 	plots        [][]string
 	visitedPlots [][]bool
@@ -60,6 +56,10 @@ type Plot struct {
 	y int
 }
 
+func (g *Garden) isBoundary(x, y int, plant string) bool {
+	return x < 0 || x >= g.height || y < 0 || y >= g.width || g.plots[x][y] != plant
+}
+
 func (g *Garden) CalcArea(x int, y int, plant string) int {
 	visiting := []Plot{Plot{x: x, y: y}}
 	g.visitedPlots[x][y] = true
@@ -71,40 +71,40 @@ func (g *Garden) CalcArea(x int, y int, plant string) int {
 		visiting = visiting[1:]
 		nodes++
 
-		if p.x-1 >= 0 && g.plots[p.x-1][p.y] == plant {
+		if g.isBoundary(p.x-1, p.y, plant) {
+			fences++
+		} else {
 			if !g.visitedPlots[p.x-1][p.y] {
-				visiting = append(visiting, Plot{x: p.x - 1, y: p.y})
 				g.visitedPlots[p.x-1][p.y] = true
+				visiting = append(visiting, Plot{x: p.x - 1, y: p.y})
 			}
-		} else {
-			fences++
 		}
 
-		if p.y+1 < g.width && g.plots[p.x][p.y+1] == plant {
+		if g.isBoundary(p.x, p.y+1, plant) {
+			fences++
+		} else {
 			if !g.visitedPlots[p.x][p.y+1] {
-				visiting = append(visiting, Plot{x: p.x, y: p.y + 1})
 				g.visitedPlots[p.x][p.y+1] = true
+				visiting = append(visiting, Plot{x: p.x, y: p.y + 1})
 			}
-		} else {
-			fences++
 		}
 
-		if p.x+1 < g.height && g.plots[p.x+1][p.y] == plant {
+		if g.isBoundary(p.x+1, p.y, plant) {
+			fences++
+		} else {
 			if !g.visitedPlots[p.x+1][p.y] {
-				visiting = append(visiting, Plot{x: p.x + 1, y: p.y})
 				g.visitedPlots[p.x+1][p.y] = true
+				visiting = append(visiting, Plot{x: p.x + 1, y: p.y})
 			}
-		} else {
-			fences++
 		}
 
-		if p.y-1 >= 0 && g.plots[p.x][p.y-1] == plant {
-			if !g.visitedPlots[p.x][p.y-1] {
-				visiting = append(visiting, Plot{x: p.x, y: p.y - 1})
-				g.visitedPlots[p.x][p.y-1] = true
-			}
-		} else {
+		if g.isBoundary(p.x, p.y-1, plant) {
 			fences++
+		} else {
+			if !g.visitedPlots[p.x][p.y-1] {
+				g.visitedPlots[p.x][p.y-1] = true
+				visiting = append(visiting, Plot{x: p.x, y: p.y - 1})
+			}
 		}
 	}
 
