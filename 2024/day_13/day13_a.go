@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -72,10 +71,8 @@ func (g *Games) CalcGames() {
 			float64(game.aButton.x*game.bButton.y-game.aButton.y*game.bButton.x)
 		cB := float64(game.price.y*game.aButton.x-game.price.x*game.aButton.y) /
 			float64(game.aButton.x*game.bButton.y-game.aButton.y*game.bButton.x)
-		fmt.Println("res: ", cA, cB, cA*3+cB)
 		if cA == float64(int(cA)) && cB == float64(int(cB)) {
 			g.count += int(cA*3 + cB)
-			fmt.Println("res: ", cA, cB, cA*3+cB)
 		}
 	}
 }
