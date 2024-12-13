@@ -83,6 +83,3 @@ func Day13A(filePath string) int {
 	games.CalcGames()
 	return games.count
 }
-
-// Too log 2012
-// Too high 105782
